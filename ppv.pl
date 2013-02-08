@@ -17,6 +17,13 @@ This is a pure perl pipe viewer to view progress of data being piped through STD
 
 Why? I needed 'pv' on MacOS and didn't want to bother installing ports.
 
+=head1 USAGE
+
+./ppv.pl <INPUTFILE >OUTPUTFILE
+
+cat BIGFILE | gzip | ./ppv.pl | ssh somehost "gunzip | someothercomand >blargh"
+
+
 =head1 AUTHOR
 
 Mark Steele, C<< <mark at control-alt-del.org> >>
