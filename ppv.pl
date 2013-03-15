@@ -37,7 +37,9 @@ use strict;
 
 my $s = IO::Select->new();
 
-$s->add(\*STDIN);
+my $size = (stat(STDIN))[7];
+
+$s->add(\*STDIN);  
 
 my $count = 0;
 my $bytes = 0;
@@ -53,7 +55,7 @@ while ($s->can_read()) {
   $bytes += $ret;
   $totalbytes += $ret;
   if (($now - $time) >= 1) {
-    printf STDERR "\rThroughput: %s/sec",format_bytes($bytes/($now-$time));
+    printf STDERR "\r\rThroughput: %s/sec, total transferred: %s of %s (%.02f\%)",format_bytes($bytes/($now-$time)), format_bytes($totalbytes), format_bytes($size), ($totalbytes/$size)*100;
     $time = $now;
     $bytes = 0;
   }
